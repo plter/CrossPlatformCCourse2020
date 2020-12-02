@@ -24,16 +24,12 @@ void Ball_Draw(Ball *self, SDL_Renderer *renderer) {
     self->dest.x += self->speedX;
     self->dest.y += self->speedY;
 
-    if (self->dest.x > WINDOW_WIDTH - self->dest.w && self->speedX > 0) {
+    if ((self->dest.x > WINDOW_WIDTH - self->dest.w && self->speedX > 0) ||
+        (self->dest.x < 0 && self->speedX < 0)) {
         self->speedX *= -1;
     }
-    if (self->dest.x < 0 && self->speedX < 0) {
-        self->speedX *= -1;
-    }
-    if (self->dest.y > WINDOW_HEIGHT - self->dest.h && self->speedY > 0) {
-        self->speedY *= -1;
-    }
-    if (self->dest.y < 0 && self->speedY < 0) {
+    if ((self->dest.y > WINDOW_HEIGHT - self->dest.h && self->speedY > 0) ||
+        (self->dest.y < 0 && self->speedY < 0)) {
         self->speedY *= -1;
     }
 
