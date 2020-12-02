@@ -2,21 +2,23 @@
 #include <SDL2/SDL.h>
 #include "Resource.h"
 #include "Ball.h"
-
-#define WIDTH 400
-#define HEIGHT 300
-#define FRAMERATE 60
+#include "Config.h"
 
 
 SDL_Renderer *renderer;
 SDL_Window *window;
 
-#define BALL_COUNT 5
+#define BALL_COUNT 50
 Ball *balls[BALL_COUNT];
 
 void createBalls() {
     for (int i = 0; i < BALL_COUNT; ++i) {
-        balls[i] = Ball_Create(40 * i, 10, (rand() % 10) - 5);
+        balls[i] = Ball_Create(
+                WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2,
+                (rand() % 10) - 5,
+                ((float) (rand() % 1000)) / 1000 * 10 - 5,
+                ((float) (rand() % 1000)) / 1000 * 10 - 5
+        );
     }
 }
 
@@ -69,7 +71,7 @@ int main() {
             "Hello World",
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
-            WIDTH, HEIGHT,
+            WINDOW_WIDTH, WINDOW_HEIGHT,
             SDL_WINDOW_SHOWN
     );
     if (window == NULL) {
@@ -77,7 +79,10 @@ int main() {
         return 1;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(
+            window, -1,
+            SDL_RENDERER_ACCELERATED
+    );
     if (renderer == NULL) {
         SDL_Log("Can not create renderer, %s", SDL_GetError());
         return 1;
