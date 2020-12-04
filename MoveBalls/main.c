@@ -8,7 +8,7 @@
 SDL_Renderer *renderer;
 SDL_Window *window;
 
-#define BALL_COUNT 50
+#define BALL_COUNT 500
 Ball *balls[BALL_COUNT];
 
 void createBalls() {
@@ -51,9 +51,9 @@ void event_loop() {
             }
         }
         uint32_t current = SDL_GetTicks();
-        uint32_t cost = current - begin;
-        uint32_t frame = 1000 / FRAMERATE;
-        uint32_t delay = frame - cost;
+        long cost = current - begin;
+        long frame = 1000 / FRAMERATE;
+        long delay = frame - cost;
 
         if (delay > 0) {
             SDL_Delay(delay);
