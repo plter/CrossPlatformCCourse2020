@@ -35,10 +35,10 @@ void event_loop() {
                 return;
             }
         }
-        uint32_t current = SDL_GetTicks();
-        uint32_t cost = current - begin;
-        uint32_t frame = 1000 / FRAMERATE;
-        uint32_t delay = frame - cost;
+        long current = SDL_GetTicks();
+        long cost = current - begin;
+        long frame = 1000 / FRAMERATE;
+        long delay = frame - cost;
 
         if (delay > 0) {
             SDL_Delay(delay);
