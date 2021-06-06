@@ -1,5 +1,9 @@
 #include <stdio.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten/emscripten.h>
+#endif
 
 #define WIDTH 400
 #define HEIGHT 300
@@ -45,7 +49,12 @@ void event_loop() {
     }
 }
 
-int main() {
+
+void em_loop() {
+    draw();
+}
+
+int main(int argc, char *argv[]) {
     if (SDL_Init(SDL_INIT_VIDEO)) {
         SDL_Log("Can not init video, %s", SDL_GetError());
         return 1;
@@ -69,7 +78,12 @@ int main() {
         return 1;
     }
 
+#ifdef __EMSCRIPTEN__
+    emscripten_set_main_loop(em_loop,0,1);
+#else // __EMSCRIPTEN__
     event_loop();
+#endif
+   
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     return 0;
