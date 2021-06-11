@@ -61,6 +61,7 @@ DisplayObject *EyeBallCreate(float x, float y) {
     data->eyeSrcRect->w = 40;
     data->eyeSrcRect->h = 40;
 
+
     struct DisplayObject *obj = DisplayObjectCreate(
             x, y, (float) data->eyeballSrcRect->w, (float) data->eyeballSrcRect->h,
             &CursorOnDraw,

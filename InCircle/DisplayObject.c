@@ -19,6 +19,7 @@ DisplayObject *DisplayObjectCreate(
     obj->onDraw = onDrawCallback;
     obj->onMouseMove = onMouseMoveCallback;
     obj->subClassData = NULL;
+    return obj;
 }
 
 void DisplayObjectDraw(DisplayObject *self, SDL_Renderer *renderer) {
